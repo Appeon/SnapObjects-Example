@@ -13,7 +13,7 @@ The sample contains two projects:
    The project is structured as follows.
 
    ```
-   |—— Appeon.SqlModelMapperDemo		Implemented with SqlModelMapper from SnapObjects.Data
+   |—— SnapObjects-Example		Implemented with SqlModelMapper from SnapObjects.Data
        |—— Appeon.SqlModelMapperDemo.SqlServer      For working with SQL Server
        |—— Appeon.SqlModelMapperDemo.Oracle         For working with Oracle
        |—— Appeon.SqlModelMapperDemo.SQLAnywhere    For working with SQL Anywhere
@@ -23,7 +23,7 @@ The sample contains two projects:
 2. A PowerBuilder project. This project is a sales demo application. The project is structured as follows.
    
    ```
-   |—— .NET-DataStore-Example		
+   |—— SnapObjects-Example		
    	|—— Appeon.SalesDemo.PB         PowerBuilder project source code
    ```
 
