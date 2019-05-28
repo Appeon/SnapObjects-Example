@@ -1,6 +1,6 @@
 ﻿# <b>SqlModelMapper Example</b>
 
-This C# project uses SqlModelMapper from [SnapObjects.Data](<<https://www.nuget.org/packages/SnapObjects.Data/>) for creating Web APIs.  It makes use of the latest released Appeon PowerBuilder 2019, including SnapDevelop (PB Edition), and shows how CRUD operations and transaction management works in SqlModelMapper.
+This C# project uses SqlModelMapper from [SnapObjects.Data](<https://www.nuget.org/packages/SnapObjects.Data/>) for creating Web APIs.  It makes use of the latest released Appeon PowerBuilder 2019, including SnapDevelop (PB Edition), and shows how CRUD operations and transaction management works in SqlModelMapper.
 
 ##### Sample Project Structure
 
