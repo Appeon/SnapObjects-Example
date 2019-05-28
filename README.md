@@ -24,7 +24,7 @@ The sample contains two projects:
    
    ```
    |—— .NET-DataStore-Example		
-   	|—— Appeon.SalesDemo.PB           			PowerBuilder project source code
+   	|—— Appeon.SalesDemo.PB         PowerBuilder project source code
    ```
 
 ##### Setting Up the Project
