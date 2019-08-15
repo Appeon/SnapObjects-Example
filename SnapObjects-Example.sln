@@ -1,52 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appeon.SqlModelMapperDemo.Oracle", "Appeon.SqlModelMapperDemo.Oracle\Appeon.SqlModelMapperDemo.Oracle.csproj", "{F0518CF5-7CF9-448D-81DA-CDB4A6A5B171}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appeon.SqlModelMapperDemo.PostgreSQL", "Appeon.SqlModelMapperDemo.PostgreSQL\Appeon.SqlModelMapperDemo.PostgreSQL.csproj", "{1BC123CD-A95B-42A9-9334-0DE7A869B641}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appeon.SqlModelMapperDemo.SQLAnywhere", "Appeon.SqlModelMapperDemo.SQLAnywhere\Appeon.SqlModelMapperDemo.SQLAnywhere.csproj", "{BAF9176B-3833-4290-888F-118D648FA1F4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appeon.SqlModelMapperDemo.SqlServer", "Appeon.SqlModelMapperDemo.SqlServer\Appeon.SqlModelMapperDemo.SqlServer.csproj", "{98BA3F6E-970A-45CC-A1E8-4284FCFF6CFB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Appeon.SalesDemo.PB", "Appeon.SalesDemo.PB", "{0EB1E60C-45D6-4B6A-A176-4D8A541E17F7}"
-	ProjectSection(SolutionItems) = preProject
-		Appeon.SalesDemo.PB\apisetup.ini = Appeon.SalesDemo.PB\apisetup.ini
-		Appeon.SalesDemo.PB\common.pbl = Appeon.SalesDemo.PB\common.pbl
-		Appeon.SalesDemo.PB\person.pbl = Appeon.SalesDemo.PB\person.pbl
-		Appeon.SalesDemo.PB\product.pbl = Appeon.SalesDemo.PB\product.pbl
-		Appeon.SalesDemo.PB\report.pbl = Appeon.SalesDemo.PB\report.pbl
-		Appeon.SalesDemo.PB\salesdemo.pbl = Appeon.SalesDemo.PB\salesdemo.pbl
-		Appeon.SalesDemo.PB\salesdemo.pbt = Appeon.SalesDemo.PB\salesdemo.pbt
-		Appeon.SalesDemo.PB\SalesDemo.pbw = Appeon.SalesDemo.PB\SalesDemo.pbw
-		Appeon.SalesDemo.PB\salesdemo.usr.opt = Appeon.SalesDemo.PB\salesdemo.usr.opt
-		Appeon.SalesDemo.PB\salesorder.pbl = Appeon.SalesDemo.PB\salesorder.pbl
-		Appeon.SalesDemo.PB\webapi.pbl = Appeon.SalesDemo.PB\webapi.pbl
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "image", "image", "{27B71DE5-1F64-48B1-8DB8-4148C93C7E3E}"
-	ProjectSection(SolutionItems) = preProject
-		Appeon.SalesDemo.PB\image\address.png = Appeon.SalesDemo.PB\image\address.png
-		Appeon.SalesDemo.PB\image\address_active.png = Appeon.SalesDemo.PB\image\address_active.png
-		Appeon.SalesDemo.PB\image\Area.PNG = Appeon.SalesDemo.PB\image\Area.PNG
-		Appeon.SalesDemo.PB\image\background.PNG = Appeon.SalesDemo.PB\image\background.PNG
-		Appeon.SalesDemo.PB\image\Bar.PNG = Appeon.SalesDemo.PB\image\Bar.PNG
-		Appeon.SalesDemo.PB\image\CRM.ico = Appeon.SalesDemo.PB\image\CRM.ico
-		Appeon.SalesDemo.PB\image\customer.png = Appeon.SalesDemo.PB\image\customer.png
-		Appeon.SalesDemo.PB\image\customer_active.png = Appeon.SalesDemo.PB\image\customer_active.png
-		Appeon.SalesDemo.PB\image\Line.PNG = Appeon.SalesDemo.PB\image\Line.PNG
-		Appeon.SalesDemo.PB\image\order.png = Appeon.SalesDemo.PB\image\order.png
-		Appeon.SalesDemo.PB\image\order_active.png = Appeon.SalesDemo.PB\image\order_active.png
-		Appeon.SalesDemo.PB\image\product.png = Appeon.SalesDemo.PB\image\product.png
-		Appeon.SalesDemo.PB\image\product_active.png = Appeon.SalesDemo.PB\image\product_active.png
-		Appeon.SalesDemo.PB\image\quit.png = Appeon.SalesDemo.PB\image\quit.png
-		Appeon.SalesDemo.PB\image\settings.png = Appeon.SalesDemo.PB\image\settings.png
-		Appeon.SalesDemo.PB\image\settings_active.png = Appeon.SalesDemo.PB\image\settings_active.png
-		Appeon.SalesDemo.PB\image\statistics.png = Appeon.SalesDemo.PB\image\statistics.png
-		Appeon.SalesDemo.PB\image\statistics_active.png = Appeon.SalesDemo.PB\image\statistics_active.png
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appeon.SnapObjectsDemo.Service.SqlServer", "Appeon.SnapObjectsDemo.Service.SqlServer\Appeon.SnapObjectsDemo.Service.SqlServer.csproj", "{B1E077E6-33EA-49F3-8B6B-B62DD8749B5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,30 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F0518CF5-7CF9-448D-81DA-CDB4A6A5B171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0518CF5-7CF9-448D-81DA-CDB4A6A5B171}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0518CF5-7CF9-448D-81DA-CDB4A6A5B171}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0518CF5-7CF9-448D-81DA-CDB4A6A5B171}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BC123CD-A95B-42A9-9334-0DE7A869B641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BC123CD-A95B-42A9-9334-0DE7A869B641}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BC123CD-A95B-42A9-9334-0DE7A869B641}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BC123CD-A95B-42A9-9334-0DE7A869B641}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAF9176B-3833-4290-888F-118D648FA1F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAF9176B-3833-4290-888F-118D648FA1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAF9176B-3833-4290-888F-118D648FA1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAF9176B-3833-4290-888F-118D648FA1F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98BA3F6E-970A-45CC-A1E8-4284FCFF6CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98BA3F6E-970A-45CC-A1E8-4284FCFF6CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98BA3F6E-970A-45CC-A1E8-4284FCFF6CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98BA3F6E-970A-45CC-A1E8-4284FCFF6CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E077E6-33EA-49F3-8B6B-B62DD8749B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E077E6-33EA-49F3-8B6B-B62DD8749B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E077E6-33EA-49F3-8B6B-B62DD8749B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E077E6-33EA-49F3-8B6B-B62DD8749B5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{27B71DE5-1F64-48B1-8DB8-4148C93C7E3E} = {0EB1E60C-45D6-4B6A-A176-4D8A541E17F7}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6B041F09-E54B-4476-9C10-40BE2C58B1D2}
+		SolutionGuid = {7D1723A6-D62E-4B8C-83DE-DCF681853D52}
 	EndGlobalSection
 EndGlobal
