@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SnapObjects.Data" Version="1.0.1" />
-    <PackageReference Include="SnapObjects.Data.AspNetCore" Version="1.0.1" />
-    <PackageReference Include="SnapObjects.Data.SqlServer" Version="1.0.1" />
+    <PackageReference Include="SnapObjects.Data" Version="2.0.0-beta" />
+    <PackageReference Include="SnapObjects.Data.AspNetCore" Version="2.0.0-beta" />
+    <PackageReference Include="SnapObjects.Data.SqlServer" Version="2.0.0-beta" />
   </ItemGroup>
   
 </Project>
