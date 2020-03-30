@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Appeon.SnapObjectsDemo.Service.Models
 {
-    [Top(1000)]
+    [Top(10000)]
     [SqlParameter("custId", typeof(int))]
     [SqlParameter("stratOrderDate", typeof(DateTime))]
     [SqlParameter("endOrderDate", typeof(DateTime))]
