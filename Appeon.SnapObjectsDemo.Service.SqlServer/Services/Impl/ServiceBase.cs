@@ -1,7 +1,8 @@
-﻿
-using Appeon.SnapObjectsDemo.Service.Models;
+﻿using Appeon.SnapObjectsDemo.Service.Models;
 using SnapObjects.Data;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
@@ -15,57 +16,86 @@ namespace Appeon.SnapObjectsDemo.Services
             _context = context;
         }
 
-        public IList<TModel> Retrieve(bool includeEmbedded, params object[] parameters)
+        public async Task<IList<TModel>> RetrieveAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default)
         {
             if (includeEmbedded)
             {
-                return _context.SqlModelMapper.Load<TModel>(parameters).IncludeAll(0, cascade: true).ToList();
+                return (await (await _context.SqlModelMapper
+                    .LoadAsync<TModel>(parameters, cancellationToken))
+                    .IncludeAllAsync(0, cascade: true, cancellationToken))
+                    .ToList();
             }
             else
             {
-                return _context.SqlModelMapper.Load<TModel>(parameters).ToList();
+                return (await _context.SqlModelMapper
+                    .LoadAsync<TModel>(parameters, cancellationToken))
+                    .ToList();
             }
         }
 
-        public TModel RetrieveByKey(bool includeEmbedded, params object[] parameters)
+        public async Task<TModel> RetrieveByKeyAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default)
         {
             TModel model;
 
             if (includeEmbedded)
             {
-                model = _context.SqlModelMapper.LoadByKey<TModel>(parameters).IncludeAll().FirstOrDefault();
+                model = (await (await _context.SqlModelMapper
+                    .LoadByKeyAsync<TModel>(parameters, cancellationToken))
+                    .IncludeAllAsync(cancellationToken: cancellationToken))
+                    .FirstOrDefault();
             }
             else
             {
-                model = _context.SqlModelMapper.LoadByKey<TModel>(parameters).FirstOrDefault();
+                model = (await _context.SqlModelMapper
+                    .LoadByKeyAsync<TModel>(parameters, cancellationToken))
+                    .FirstOrDefault();
             }
 
             return model;
         }
 
 
-        public Page<TModel> LoadByPage(int pageIndex, int pageSize, bool includeEmbedded, params object[] parameters)
+        public async Task<Page<TModel>> LoadByPageAsync(
+            int pageIndex,
+            int pageSize,
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default)
         {
-            int currentIndex = (pageIndex - 1) * pageSize;
+            var currentIndex = (pageIndex - 1) * pageSize;
+
             IList<TModel> items = null;
-            Page<TModel> page = new Page<TModel>();
+            var page = new Page<TModel>();
+
             page.PageSize = pageSize;
             page.PageIndex = pageIndex;
+
             if (includeEmbedded)
             {
 
-                items = _context.SqlModelMapper.LoadByPage<TModel>(currentIndex, pageSize, parameters)
-                                               .IncludeAll()
-                                               .ToList();
+                items = (await (await _context.SqlModelMapper
+                    .LoadByPageAsync<TModel>(currentIndex, pageSize, parameters, cancellationToken))
+                    .IncludeAllAsync(cancellationToken: cancellationToken))
+                    .ToList();
 
             }
             else
             {
-                items = _context.SqlModelMapper.LoadByPage<TModel>(currentIndex, pageSize, parameters).ToList();
+                items = (await _context.SqlModelMapper
+                    .LoadByPageAsync<TModel>(currentIndex, pageSize, parameters, cancellationToken))
+                    .ToList();
             }
-            int totalItems = _context.SqlModelMapper.Count<TModel>(parameters);
+
+            var totalItems = _context.SqlModelMapper.Count<TModel>(parameters);
             page.TotalItems = totalItems;
             page.Items = items;
+
             return page;
         }
 

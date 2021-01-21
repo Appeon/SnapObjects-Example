@@ -18,6 +18,6 @@ namespace Appeon.SnapObjectsDemo.Service.Datacontext
         public OrderContext(IDataContextOptions options)
             : base(options)
         {
-        } 
+        }
     }
 }

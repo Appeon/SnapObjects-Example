@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Appeon.SnapObjectsDemo.Service.Models
 {
-    [SqlParameter("saleId",typeof(int))]
+    [SqlParameter("saleId", typeof(int))]
     [Table("SalesOrderDetail", Schema = "Sales")]
     [SqlWhere("Salesorderid=:saleId")]
     public class SalesOrderDetail
@@ -50,8 +50,9 @@ namespace Appeon.SnapObjectsDemo.Service.Models
         public decimal? LineTotal { get; set; }
 
         [DisplayName("Modified Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ModifiedDate { get; set; }
+
     }
 }

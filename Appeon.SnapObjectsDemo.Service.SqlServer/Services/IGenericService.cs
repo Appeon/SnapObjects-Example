@@ -1,14 +1,23 @@
 ﻿using SnapObjects.Data;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
     public interface IGenericService<TModel>
     {
-        IList<TModel> Retrieve(bool includeEmbedded, params object[] parameters);
+        Task<IList<TModel>> RetrieveAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        TModel RetrieveReport(TModel master, params object[] parameters);
+        Task<TModel> RetrieveReportAsync(
+            TModel master,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        IDbResult DeleteByKey(params object[] parameters);
+        Task<IDbResult> DeleteByKeyAsync(object[] parameters, CancellationToken cancellationToken = default);
+
     }
 }

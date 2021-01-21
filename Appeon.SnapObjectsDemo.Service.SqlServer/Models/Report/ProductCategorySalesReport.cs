@@ -1,5 +1,5 @@
-﻿using SnapObjects.Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SnapObjects.Data;
 using System.Collections.Generic;
 
 namespace Appeon.SnapObjectsDemo.Service.Models
@@ -50,5 +50,6 @@ namespace Appeon.SnapObjectsDemo.Service.Models
         public IList<ProductCategorySalesReport_D> OrderReportMonth11 { get; set; }
         [ModelEmbedded(typeof(ProductCategorySalesReport_D), ParamValue = ":orderMonth12")]
         public IList<ProductCategorySalesReport_D> OrderReportMonth12 { get; set; }
+
     }
 }

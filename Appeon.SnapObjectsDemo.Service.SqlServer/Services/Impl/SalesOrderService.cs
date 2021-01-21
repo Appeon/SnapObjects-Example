@@ -1,36 +1,36 @@
-﻿
-using Appeon.SnapObjectsDemo.Service.Datacontext;
+﻿using Appeon.SnapObjectsDemo.Service.Datacontext;
 using Appeon.SnapObjectsDemo.Service.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
     public class SalesOrderService : ServiceBase<SalesOrder>, ISalesOrderService
     {
         public SalesOrderService(OrderContext context)
-            :base(context)
-        {
-        }
+            : base(context)
+        { }
 
-        public int Create(SalesOrder salesOrder)
+        public async Task<int> CreateAsync(SalesOrder salesOrder, CancellationToken cancellationToken = default)
         {
-            return _context.SqlModelMapper.TrackCreate<SalesOrder>(salesOrder)
-                                          .SaveChanges()
+            return (await _context.SqlModelMapper.TrackCreate(salesOrder)
+                                          .SaveChangesAsync(cancellationToken))
                                           .InsertedCount;
         }
 
-        public int DeleteByKey(params object[] parameters)
+        public async Task<int> DeleteByKeyAsync(object[] parameters, CancellationToken cancellationToken = default)
         {
-            return _context.SqlModelMapper.TrackDeleteByKey<SalesOrder>(parameters)
-                                          .SaveChanges()
+            return (await _context.SqlModelMapper.TrackDeleteByKey<SalesOrder>(parameters)
+                                          .SaveChangesAsync(cancellationToken))
                                           .DeletedCount;
         }
 
-        public int Update(SalesOrder salesOrder)
+        public async Task<int> UpdateAsync(SalesOrder salesOrder, CancellationToken cancellationToken = default)
         {
-            var oldSalesOrder = this.RetrieveByKey(true, salesOrder.SalesOrderID);
+            var oldSalesOrder = await RetrieveByKeyAsync(true, new object[] { salesOrder.SalesOrderID }, cancellationToken);
 
-            return _context.SqlModelMapper.TrackUpdate(oldSalesOrder, salesOrder)
-                                          .SaveChanges()
+            return (await _context.SqlModelMapper.TrackUpdate(oldSalesOrder, salesOrder)
+                                          .SaveChangesAsync(cancellationToken))
                                           .ModifiedCount;
         }
 

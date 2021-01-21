@@ -1,6 +1,8 @@
 ﻿using Appeon.SnapObjectsDemo.Service.Datacontext;
 using Appeon.SnapObjectsDemo.Service.Models;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
@@ -12,23 +14,27 @@ namespace Appeon.SnapObjectsDemo.Services
         {
         }
 
-        public int Create(SalesOrderDetail salesOrderDetail)
+        public async Task<int> CreateAsync(SalesOrderDetail salesOrderDetail, CancellationToken cancellationToken = default)
         {
             salesOrderDetail.ModifiedDate = DateTime.Now;
 
-            return _context.SqlModelMapper.TrackCreate<SalesOrderDetail>(salesOrderDetail)
-                                          .SaveChanges()
+            return (await _context.SqlModelMapper.TrackCreate(salesOrderDetail)
+                                          .SaveChangesAsync(cancellationToken))
                                           .InsertedCount;
         }
 
-
-        public int Update(SalesOrderDetail salesOrderDetail)
+        public async Task<int> UpdateAsync(SalesOrderDetail salesOrderDetail, CancellationToken cancellationToken = default)
         {
-            var oldSalesOrderDetail = this.RetrieveByKey(false, salesOrderDetail.SalesOrderDetailID);
+            var oldSalesOrderDetail = await RetrieveByKeyAsync(
+                false,
+                new object[] { salesOrderDetail.SalesOrderDetailID },
+                cancellationToken);
 
-            return _context.SqlModelMapper.TrackUpdate(oldSalesOrderDetail, salesOrderDetail)
-                                          .SaveChanges()
-                                          .ModifiedCount;
+            return (await _context.SqlModelMapper
+                                  .TrackUpdate(oldSalesOrderDetail, salesOrderDetail)
+                                  .SaveChangesAsync(cancellationToken))
+                                  .ModifiedCount;
         }
+
     }
 }

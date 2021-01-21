@@ -1,18 +1,18 @@
-﻿using SnapObjects.Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SnapObjects.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
 
 namespace Appeon.SnapObjectsDemo.Service.Models
 {
     [Top(10000)]
     [SqlParameter("custId", typeof(int))]
-    [SqlParameter("stratOrderDate", typeof(DateTime))]
-    [SqlParameter("endOrderDate", typeof(DateTime))]
-    [Table("SalesOrderHeader",Schema = "Sales")]
+    [SqlParameter("stratOrderDate", typeof(DateTime?))]
+    [SqlParameter("endOrderDate", typeof(DateTime?))]
+    [Table("SalesOrderHeader", Schema = "Sales")]
     [SqlWhere("(CustomerId = :custId Or :custId = 0) " +
         " and (Orderdate Between :stratOrderDate and :endOrderDate)")]
     //[SqlOrderBy("SalesOrderID desc")]
@@ -29,20 +29,19 @@ namespace Appeon.SnapObjectsDemo.Service.Models
 
         [Required]
         [DisplayName("Order Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? OrderDate { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{yyyy/MM/dd:0}")]
+        public DateTime OrderDate { get; set; }
 
         [Required]
         [DisplayName("Due Date")]
-        [DataType(DataType.Date)]
-
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? DueDate { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{yyyy/MM/dd:0}")]
+        public DateTime DueDate { get; set; }
 
         [DisplayName("Ship Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{yyyy/MM/dd:0}")]
         public DateTime? ShipDate { get; set; }
 
         [Required]
@@ -50,7 +49,7 @@ namespace Appeon.SnapObjectsDemo.Service.Models
 
         [Required]
         [DisplayName("Online Order Flag")]
-        public Boolean OnlineOrderFlag { get; set; }
+        public bool OnlineOrderFlag { get; set; }
 
         [DisplayName("Order Number")]
         //[SqlDefaultValue("(isnull(N'SO'+CONVERT([nvarchar](23),[SalesOrderID]),N'*** ERROR ***'))")]
@@ -116,14 +115,15 @@ namespace Appeon.SnapObjectsDemo.Service.Models
         public string Comment { get; set; }
 
         [DisplayName("Modified Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [SqlDefaultValue("(getdate())")]
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
         [JsonIgnore]
         [SetValue("$SalesOrderID", "$SalesOrderID", SetValueStrategy.Always)]
         [ModelEmbedded(typeof(SalesOrderDetail), ParamValue = "$SalesOrderID",
-            CascadeCreate =true, CascadeDelete = true)]
+            CascadeCreate = true, CascadeDelete = true)]
         public IList<SalesOrderDetail> OrderDetails { get; set; }
+
     }
 }

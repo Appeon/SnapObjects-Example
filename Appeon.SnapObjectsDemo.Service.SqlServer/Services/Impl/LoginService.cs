@@ -1,9 +1,6 @@
 ﻿using Appeon.SnapObjectsDemo.Service.Datacontext;
 using Appeon.SnapObjectsDemo.Service.Models;
 using SnapObjects.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
@@ -18,32 +15,32 @@ namespace Appeon.SnapObjectsDemo.Services
 
         public bool Login(string userName, string password)
         {
-            String[] userNames = userName.Split('.');
-            String firstName = userNames[0];
-            String lastName = userNames[1];
-            String pwd = password;
+            var userNames = userName.Split('.');
+            var firstName = userNames[0];
+            var lastName = userNames[1];
+            var pwd = password;
 
-            return this._context.SqlModelMapper.Exists<Login>(firstName, lastName, pwd);
+            return _context.SqlModelMapper.Exists<Login>(firstName, lastName, pwd);
         }
 
         public bool UserIsExist(string userName)
         {
             //prepare parameter
-            String[] userNames = userName.Split('.');
-            String firstName = userNames[0];
-            String lastName = userNames[1];
+            var userNames = userName.Split('.');
+            var firstName = userNames[0];
+            var lastName = userNames[1];
 
             //init sql query build
-            SqlQueryBuilder sqlQueryBuilder = new SqlQueryBuilder();
+            var sqlQueryBuilder = new SqlQueryBuilder();
             sqlQueryBuilder.Select("*")
                 .From("Person.Person")
                 .Where("FirstName", SqlBuilder.Parameter<string>("firstName"))
                 .AndWhere("LastName", SqlBuilder.Parameter<string>("lastName"));
 
-            String sql = sqlQueryBuilder.ToSqlString(this._context);
+            var sql = sqlQueryBuilder.ToSqlString(_context);
 
             //execute sql
-            var dynamicModel = this._context.SqlExecutor.Select<DynamicModel>(sql, firstName, lastName);
+            var dynamicModel = _context.SqlExecutor.Select<DynamicModel>(sql, firstName, lastName);
             if (dynamicModel.Count == 0)
             {
                 return false;
@@ -51,5 +48,6 @@ namespace Appeon.SnapObjectsDemo.Services
 
             return true;
         }
+
     }
 }

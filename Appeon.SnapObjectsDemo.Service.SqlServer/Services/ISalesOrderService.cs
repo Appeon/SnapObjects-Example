@@ -1,20 +1,34 @@
 ﻿using Appeon.SnapObjectsDemo.Service.Models;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
     public interface ISalesOrderService
     {
-        IList<SalesOrder> Retrieve(bool includeEmbedded, params object[] parameters);
-        
-        SalesOrder RetrieveByKey(bool includeEmbedded, params object[] parameters);
+        Task<IList<SalesOrder>> RetrieveAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        Page<SalesOrder> LoadByPage(int pageIndex, int pageSize, bool includeEmbedded, params object[] parameters);
+        Task<SalesOrder> RetrieveByKeyAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        int Create(SalesOrder salesOrder);
+        Task<Page<SalesOrder>> LoadByPageAsync(
+            int pageIndex,
+            int pageSize,
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        int Update(SalesOrder salesOrder);
+        Task<int> CreateAsync(SalesOrder salesOrder, CancellationToken cancellationToken = default);
 
-        int DeleteByKey(params object[] parameters);
+        Task<int> UpdateAsync(SalesOrder salesOrder, CancellationToken cancellationToken = default);
+
+        Task<int> DeleteByKeyAsync(object[] parameters, CancellationToken cancellationToken = default);
+
     }
 }

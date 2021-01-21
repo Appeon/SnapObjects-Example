@@ -1,17 +1,25 @@
-﻿using System.Collections.Generic;
-using Appeon.SnapObjectsDemo.Service.Models;
+﻿using Appeon.SnapObjectsDemo.Service.Models;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
     public interface ISalesOrderDetailService
     {
-        IList<SalesOrderDetail> Retrieve(bool includeEmbedded, params object[] parameters);
+        Task<IList<SalesOrderDetail>> RetrieveAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        SalesOrderDetail RetrieveByKey(bool includeEmbedded, params object[] parameters);
+        Task<SalesOrderDetail> RetrieveByKeyAsync(
+            bool includeEmbedded,
+            object[] parameters,
+            CancellationToken cancellationToken = default);
 
-        int Create(SalesOrderDetail salesOrderDetail);
+        Task<int> CreateAsync(SalesOrderDetail salesOrderDetail, CancellationToken cancellationToken = default);
 
-        int Update(SalesOrderDetail salesOrderDetail);
+        Task<int> UpdateAsync(SalesOrderDetail salesOrderDetail, CancellationToken cancellationToken = default);
 
     }
 }

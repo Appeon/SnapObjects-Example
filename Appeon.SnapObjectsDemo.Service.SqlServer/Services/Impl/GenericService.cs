@@ -1,5 +1,7 @@
 ﻿using Appeon.SnapObjectsDemo.Service.Datacontext;
 using SnapObjects.Data;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
@@ -8,20 +10,19 @@ namespace Appeon.SnapObjectsDemo.Services
     {
         public GenericService(OrderContext context)
             : base(context)
+        { }
+
+        public async Task<TModel> RetrieveReportAsync(TModel master, object[] parameters, CancellationToken cancellationToken = default)
         {
+            return (await _context.SqlModelMapper.LoadEmbedded(master, parameters)
+                                                 .IncludeAllAsync(cancellationToken: cancellationToken))
+                                                 .MasterModel;
         }
 
-        public TModel RetrieveReport(TModel master, params object[] parameters)
+        public async Task<IDbResult> DeleteByKeyAsync(object[] parameters, CancellationToken cancellationToken = default)
         {
-            return _context.SqlModelMapper.LoadEmbedded(master, parameters)
-                                          .IncludeAll()
-                                          .MasterModel;
-        }
-
-        public IDbResult DeleteByKey(params object[] parameters)
-        {
-            return _context.SqlModelMapper.TrackDeleteByKey<TModel>(parameters)
-                                          .SaveChanges();
+            return await _context.SqlModelMapper.TrackDeleteByKey<TModel>(parameters)
+                                          .SaveChangesAsync(cancellationToken);
         }
     }
 }

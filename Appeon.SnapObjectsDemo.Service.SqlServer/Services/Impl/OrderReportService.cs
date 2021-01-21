@@ -1,8 +1,9 @@
 ﻿using Appeon.SnapObjectsDemo.Service.Datacontext;
 using Appeon.SnapObjectsDemo.Service.Models;
 using SnapObjects.Data;
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appeon.SnapObjectsDemo.Services
 {
@@ -16,21 +17,28 @@ namespace Appeon.SnapObjectsDemo.Services
             _context = context;
         }
 
-        public CategorySalesReportByYear RetrieveCategorySalesReportByYear(
-            CategorySalesReportByYear master, string currentYear, string lastYear)
+        public async Task<CategorySalesReportByYear> RetrieveCategorySalesReportByYearAsync(
+            CategorySalesReportByYear master,
+            string currentYear,
+            string lastYear,
+            CancellationToken cancellationToken = default)
         {
-            return _genericService.Get<CategorySalesReportByYear>().RetrieveReport(master, currentYear, lastYear);
-        }
-		
-        public ProductCategorySalesReport RetrieveProductCategorySalesReport(
-            ProductCategorySalesReport master,params object[] salesmonth)
-        {
-            return _genericService.Get<ProductCategorySalesReport>().RetrieveReport(master, salesmonth);
+            return await _genericService.Get<CategorySalesReportByYear>()
+                .RetrieveReportAsync(master, new object[] { currentYear, lastYear }, cancellationToken);
         }
 
-        public Dictionary<string, int> RetrieveSalesOrderTotalReport()
+        public async Task<ProductCategorySalesReport> RetrieveProductCategorySalesReportAsync(
+            ProductCategorySalesReport master,
+            object[] salesmonth,
+            CancellationToken cancellationToken = default)
         {
-            String sql = "select count(1) as totalNum, "
+            return await _genericService.Get<ProductCategorySalesReport>()
+                .RetrieveReportAsync(master, salesmonth, cancellationToken);
+        }
+
+        public async Task<Dictionary<string, int>> RetrieveSalesOrderTotalReportAsync(CancellationToken cancellationToken = default)
+        {
+            var sql = "select count(1) as totalNum, "
                         + " sum(case when status = 1 then 1 else 0 end) as process,"
                         + " sum(case when status = 2 then 1 else 0 end) as approved,"
                         + " sum(case when status = 3 then 1 else 0 end) as backordered,"
@@ -40,18 +48,20 @@ namespace Appeon.SnapObjectsDemo.Services
                         + " from sales.SalesOrderHeader";
 
             //execute sql
-            var dynamicModel = this._context.SqlExecutor.SelectOne<DynamicModel>(sql);
+            var dynamicModel = await _context.SqlExecutor
+                .SelectOneAsync<DynamicModel>(sql, new object[] { }, cancellationToken);
 
-            Dictionary<string, int> result = new Dictionary<string, int>();
+            var result = new Dictionary<string, int>();
             if (dynamicModel != null)
             {
-                for (int i = 0; i < dynamicModel.PropertyCount; i++)
+                for (var i = 0; i < dynamicModel.PropertyCount; i++)
                 {
-                    string key = dynamicModel.Properties[i].Name;
+                    var key = dynamicModel.Properties[i].Name;
                     result.Add(key, dynamicModel.GetValue<int>(key));
                 }
             }
             return result;
         }
+
     }
 }
