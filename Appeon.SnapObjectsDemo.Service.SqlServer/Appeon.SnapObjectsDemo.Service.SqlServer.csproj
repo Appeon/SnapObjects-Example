@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <StartupObject />
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="SnapObjects.Data.AspNetCore" Version="3.1.0" />
-    <PackageReference Include="SnapObjects.Data.SqlServer" Version="3.1.0" />
+    <PackageReference Include="SnapObjects.Data.AspNetCore" Version="4.0.0" />
+    <PackageReference Include="SnapObjects.Data.SqlServer" Version="4.0.0" />
   </ItemGroup>
-  
 </Project>
